@@ -10,14 +10,18 @@ package servease_test;
  */
 
 public class User {
-    private int id;
+    private String id;
     private String username;
+    private String firstName;
+    private String lastName;
     private String password;
     private String role;
 
-    public User(int id, String username, String password, String role) {
+    public User(String id, String username, String firstName, String lastName, String password, String role) {
         this.id = id;
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;  
         this.password = password;
         this.role = role;
     }
@@ -33,4 +37,13 @@ public class User {
     public String getRole() {
         return role;
     }
+    
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    public String getLasteName() {
+        return lastName;
+    }
+    
 }

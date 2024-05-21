@@ -4,35 +4,71 @@
  */
 package servease_test;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- *
- * @author hp
- */
 public class Menu {
-    private int id;
-    private List<Product> products;
+    private Map<String, MenuItem> menuItems;
 
-    public Menu(int id, List<Product> products) {
-        this.id = id;
-        this.products = products;
+    public Menu() {
+        this.menuItems = new HashMap<>();
     }
 
-    public void viewProducts() {
-        // Προβολή προϊόντων
+    public void displayMenu() {
+        System.out.println("Menu:");
+        for (MenuItem item : menuItems.values()) {
+            System.out.println(item);
+        }
     }
 
-    public void modifyPrice(Product product, double newPrice) {
-        // Τροποποίηση τιμής προϊόντος
+    public void addItem(String name, double price, String description) {
+        if (menuItems.containsKey(name)) {
+            System.out.println("Item already exists.");
+        } else {
+            MenuItem newItem = new MenuItem(name, price, description);
+            menuItems.put(name, newItem);
+            System.out.println("Item added successfully.");
+        }
     }
 
-    public void deleteProduct(Product product) {
-        // Διαγραφή προϊόντος
+    public void deleteItem(String name) {
+        if (menuItems.containsKey(name)) {
+            menuItems.remove(name);
+            System.out.println("Item deleted successfully.");
+        } else {
+            System.out.println("Item does not exist.");
+        }
     }
-    
-    // Μέθοδος για προσθήκη προϊόντος στον κατάλογο
-    public void addProduct(Product product) {
-        products.add(product);
+
+    public void modifyItemPrice(String name, double newPrice) {
+        if (menuItems.containsKey(name)) {
+            MenuItem item = menuItems.get(name);
+            item.setPrice(newPrice);
+            System.out.println("Item price updated successfully.");
+        } else {
+            System.out.println("Item does not exist.");
+        }
     }
 }
+
+class MenuItem {
+    private String name;
+    private double price;
+    private String description;
+
+    public MenuItem(String name, double price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return name + ": " + price + " - " + description;
+    }
+}
+

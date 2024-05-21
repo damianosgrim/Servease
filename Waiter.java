@@ -1,25 +1,17 @@
 package servease_test;
 
 public class Waiter extends User {
-    public Waiter(int id, String username, String password) {
-        super(id, username, password, "waiter");
+    public Waiter(String id, String username, String firstName, String lastName, String password) {
+        super(id, username, firstName, lastName, password, "waiter");
+    }
+ 
+ public boolean authenticate() {
+        // Code to authenticate waiter
+        // For simplicity, assume always returns true
+        return true;
     }
 
-    public void login() {
-        // Εισαγωγή κώδικα για σύνδεση
+    public void takeOrder(Order order) {
+        order.placeOrder();
     }
-
-    public void viewOrders() {
-        // Εμφάνιση παραγγελιών
-    }
-
-    public void processPayment() {
-        // Επεξεργασία πληρωμής
-    }
-
-    public void addNotes() {
-        // Προσθήκη σημειώσεων στις παραγγελίες
-    }
-
-  
 }

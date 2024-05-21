@@ -12,28 +12,59 @@ import java.util.List;
  *
  * @author hp
  */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
-    private Customer customer;
-    private List<Product> products;
-    private double totalAmount;
+    private String tableNumber;
+    private String roomNumber;
+    private List<String> items;
     private boolean isPaid;
 
-    // Κατασκευαστής
-    public Order(Customer customer) {
-        this.customer = customer;
-        this.products = new ArrayList<>();
-        this.totalAmount = 0.0;
+    public Order(String tableNumber, String roomNumber) {
+        this.tableNumber = tableNumber;
+        this.roomNumber = roomNumber;
+        this.items = new ArrayList<>();
         this.isPaid = false;
     }
 
-    // Μέθοδος για προσθήκη προϊόντος
-    public void addProduct(Product product) {
-        products.add(product);
-        totalAmount += product.getPrice();
+   
+    public void placeOrder() {
+        // Code to place order
+        System.out.println("Order placed for table " + tableNumber + " and room " + roomNumber);
+    } 
+    public void addItem(String item, String note) {
+        items.add(item + " - " + note);
     }
 
-    // Μέθοδος για πληρωμή
-    public void makePayment() {
-        isPaid = true;
+    public void viewOrder() {
+        System.out.println("Order for table " + tableNumber + ":");
+        for (String item : items) {
+            System.out.println(item);
+        }
+    }
+
+    public void sendOrder() {
+        // Code to send the order
+        System.out.println("Order sent for table " + tableNumber);
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void payOrder(RoomCharge roomCharge) {
+        if (roomCharge.isCardProvided() && roomCharge.getCreditLimit() >= calculateTotal()) {
+            this.isPaid = true;
+            System.out.println("Order paid using room charge for room " + roomCharge.getRoomNumber());
+        } else {
+            System.out.println("Payment failed. Not enough credit or card not provided.");
+        }
+    }
+
+    private double calculateTotal() {
+        // Dummy implementation
+        return items.size() * 10.0; // Assume each item costs 10 units
     }
 }
+
