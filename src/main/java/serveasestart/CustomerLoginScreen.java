@@ -111,14 +111,14 @@ public class CustomerLoginScreen extends javax.swing.JFrame {
 
         int roomNumber = Integer.parseInt(roomNumberStr);
 
-        if (customer.getRoomNumber() == roomNumber && customer.getLastName().equals(lastName)) {
+     /*  if (customer.getRoomNumber() == roomNumber && customer.getLastName().equals(lastName)) {
             CustomerHomeScreen chs = new CustomerHomeScreen();
             chs.show();
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Invalid Room Number or Last Name");
         }
-    
+    */ 
     }//GEN-LAST:event_LoginbtActionPerformed
 
     /**

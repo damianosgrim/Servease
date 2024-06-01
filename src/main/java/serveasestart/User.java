@@ -13,7 +13,7 @@ public class User {
     private String id;
     private String username;
     private String firstName;
-    String lastName;
+    private  String lastName;
     private String password;
     private String role;
 
@@ -44,6 +44,10 @@ public class User {
     
     public String getLastName() {
         return lastName;
+    }
+    
+     public String getId() {
+        return id;
     }
     
 }
