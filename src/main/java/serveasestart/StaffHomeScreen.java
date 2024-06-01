@@ -6,6 +6,14 @@ package serveasestart;
 
 import java.util.HashMap;
 import java.util.Map;
+import serveasestart.ModifyOrderScreen;
+import serveasestart.ModifyOrderScreen;
+import serveasestart.NewOrderScreen;
+import serveasestart.NewOrderScreen;
+import serveasestart.Tables;
+import serveasestart.Tables;
+import serveasestart.Waiter;
+import serveasestart.Waiter;
 
 /**
  *
@@ -68,6 +76,8 @@ public class StaffHomeScreen extends javax.swing.JFrame {
 
         jLabel2.setText("Enter table number");
 
+        jTextField1.setText("# of number");
+
         jButton1.setText("Check Table");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,12 +101,12 @@ public class StaffHomeScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(422, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(NewOrderbt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ModifuOrderbt)
                         .addGap(66, 66, 66))))
         );
@@ -125,10 +135,14 @@ public class StaffHomeScreen extends javax.swing.JFrame {
 
     private void NewOrderbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewOrderbtActionPerformed
         // TODO add your handling code here:
-        NewOrderScreen nos = new NewOrderScreen ();
-        nos.show();
-        
-        dispose ();
+        try {
+        int tableNumber = Integer.parseInt(jTextField1.getText());
+        NewOrderScreen nos = new NewOrderScreen(tableNumber);
+        nos.setVisible(true);
+        dispose();
+    } catch (NumberFormatException e) {
+        jLabel3.setText("Please enter a valid table number.");
+    }
     }//GEN-LAST:event_NewOrderbtActionPerformed
 
     private void ModifuOrderbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifuOrderbtActionPerformed
