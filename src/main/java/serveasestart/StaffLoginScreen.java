@@ -131,7 +131,7 @@ public class StaffLoginScreen extends javax.swing.JFrame {
         dispose();
     } else if (waiter.getId().equals(id) && waiter.getPassword().equals(password)) {
         System.out.println("Waiter login successful");
-        StaffHomeScreen shs = new StaffHomeScreen();
+        StaffHomeScreen shs = new StaffHomeScreen(waiter);
         shs.setVisible(true);
         dispose();
     } else {
