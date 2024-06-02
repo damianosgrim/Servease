@@ -22,10 +22,13 @@ import serveasestart.Waiter;
 public class StaffHomeScreen extends javax.swing.JFrame {
     private static Waiter waiter;
     private Map<Integer, Tables> tablesMap; // Map to store table objects
-
-    public StaffHomeScreen(Waiter waiter) {
+    private static Menu menu; 
+    static Map<Integer, Order> ordersMap = new HashMap<>(); // Map to store orders
+    
+    public StaffHomeScreen(Waiter waiter, Menu menu) {
         this.waiter = waiter;
         this.tablesMap = new HashMap<>();
+        this.menu = menu;        
         // Initialize tables
         for (int i = 1; i <= 10; i++) {
             tablesMap.put(i, new Tables(i));
@@ -137,9 +140,10 @@ public class StaffHomeScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
         int tableNumber = Integer.parseInt(jTextField1.getText());
-        NewOrderScreen nos = new NewOrderScreen(tableNumber);
+        NewOrderScreen nos = new NewOrderScreen(tableNumber, menu, waiter);
         nos.setVisible(true);
-        dispose();
+        nos.pack();
+        setVisible(false);
     } catch (NumberFormatException e) {
         jLabel3.setText("Please enter a valid table number.");
     }
@@ -147,10 +151,20 @@ public class StaffHomeScreen extends javax.swing.JFrame {
 
     private void ModifuOrderbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifuOrderbtActionPerformed
         // TODO add your handling code here:
-        ModifyOrderScreen mos = new ModifyOrderScreen ();
-        mos.show();
-        
-        dispose ();
+        try {
+            int tableNumber = Integer.parseInt(jTextField1.getText());
+            Order order = ordersMap.get(tableNumber);
+            if (order != null) {
+                ModifyOrderScreen mos = new ModifyOrderScreen(order, menu, waiter);
+                mos.setVisible(true);
+                mos.pack();
+                setVisible(false);
+            } else {
+                jLabel3.setText("No order found for table " + tableNumber);
+            }
+        } catch (NumberFormatException e) {
+            jLabel3.setText("Please enter a valid table number.");
+        }
     }//GEN-LAST:event_ModifuOrderbtActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -163,7 +177,7 @@ public class StaffHomeScreen extends javax.swing.JFrame {
                 jLabel3.setText("Table " + tableNumber + " does not exist.");
                 NewOrderbt.setVisible(false);
                 ModifuOrderbt.setVisible(false);
-            } else if (table.isAvailable()) {
+            } else if (ordersMap.containsKey(tableNumber)) {
                 jLabel3.setText("Table " + tableNumber + " is available for new orders.");
                 NewOrderbt.setVisible(true);
                 ModifuOrderbt.setVisible(false);
@@ -205,12 +219,12 @@ public class StaffHomeScreen extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StaffHomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+    
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-               new StaffHomeScreen(waiter).setVisible(true);
+               new StaffHomeScreen(waiter, menu).setVisible(true);
             }
         });
     }
