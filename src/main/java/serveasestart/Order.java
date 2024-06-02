@@ -101,5 +101,8 @@ public class Order {
      public List<Double> getPrices() {
     return prices;
 }
+     public void setPaid(boolean isPaid) {
+    this.isPaid = isPaid;
+}
 }
 

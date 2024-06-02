@@ -4,18 +4,34 @@
  */
 package serveasestart;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
  */
 public class PaymentScreen extends javax.swing.JFrame {
+      private static Order order;
+    private static Menu menu;
+    private static Waiter waiter;
 
     /**
      * Creates new form PaymentScreen
      */
-    public PaymentScreen() {
+    public PaymentScreen(Order order, Menu menu, Waiter waiter) {
+        this.order = order;
+        this.menu = menu;
+        this.waiter = waiter;
+       // this.roomCharge = roomCharge;
         initComponents();
+        updateTotal();
     }
+
+    private void updateTotal() {
+        double total = order.calculateTotal();
+        totalLabel.setText("Total: $" + String.format("%.2f", total));
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,17 +45,25 @@ public class PaymentScreen extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton1.setText("Cash/Card");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton2.setText("Charge Room");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Pay With :");
+
+        totalLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -52,7 +76,8 @@ public class PaymentScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(45, 45, 45)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,11 +89,23 @@ public class PaymentScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         order.setPaid(true);
+        StaffHomeScreen.ordersMap.remove(Integer.parseInt(order.getTableNumber()));
+        JOptionPane.showMessageDialog(this, "Order paid in cash/card.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        StaffHomeScreen staffHomeScreen = new StaffHomeScreen(waiter, menu);
+        staffHomeScreen.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -100,7 +137,7 @@ public class PaymentScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaymentScreen().setVisible(true);
+                new PaymentScreen(order, menu, waiter).setVisible(true);
             }
         });
     }
@@ -109,5 +146,6 @@ public class PaymentScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel totalLabel;
     // End of variables declaration//GEN-END:variables
 }

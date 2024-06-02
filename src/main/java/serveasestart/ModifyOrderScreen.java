@@ -98,6 +98,11 @@ private void initializeListModel1() {
         jScrollPane1.setViewportView(jList1);
 
         PayBt.setText("Payment");
+        PayBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PayBtActionPerformed(evt);
+            }
+        });
 
         AddBt.setText("Add Product");
         AddBt.addActionListener(new java.awt.event.ActionListener() {
@@ -209,6 +214,14 @@ private void initializeListModel1() {
         staffHomeScreen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void PayBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayBtActionPerformed
+        // TODO add your handling code here:
+        PaymentScreen paymentScreen = new PaymentScreen(order, menu, waiter);
+        paymentScreen.setVisible(true);
+        this.dispose();
+    
+    }//GEN-LAST:event_PayBtActionPerformed
 
     /**
      * @param args the command line arguments
