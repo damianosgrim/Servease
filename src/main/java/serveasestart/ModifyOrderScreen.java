@@ -4,6 +4,10 @@
  */
 package serveasestart;
 
+import java.util.Collection;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -12,6 +16,7 @@ public class ModifyOrderScreen extends javax.swing.JFrame {
  private static Order order;
    private static Menu menu;
    private static Waiter waiter;
+   private DefaultListModel<String> listModel;
     /**
      * Creates new form ModifyOrderScreen
      */
@@ -20,8 +25,42 @@ public class ModifyOrderScreen extends javax.swing.JFrame {
         this.waiter = waiter;
         this.menu = menu;
         initComponents();
+        initializeListModel1();
+        initializeListModel2();
+        updateTotal();
+        
+    }
+private void initializeListModel1() {
+        listModel = new DefaultListModel<>();
+        Collection<MenuItem> items = menu.getMenuItems();
+        for (MenuItem item : items) {
+            listModel.addElement(item.toString());
+        }
+        jList1.setModel(listModel);
     }
 
+  /*private void initializeListMode2() {
+        listModel = new DefaultListModel<>();
+        for (String item : order.getItems()) {
+            listModel.addElement(item);
+        }
+        jList3.setModel(listModel); 
+} */
+
+ private void initializeListModel2() {
+        listModel = new DefaultListModel<>();
+        for (int i = 0; i < order.getItems().size(); i++) {
+            String item = order.getItems().get(i);
+            double price = order.getPrices().get(i);
+            listModel.addElement(item + " - $" + price);
+        }
+        jList3.setModel(listModel);
+    }
+  
+  private void updateTotal() {
+        double total = order.calculateTotal();
+        totalLabel.setText("Total: $" + String.format("%.2f", total));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,21 +70,145 @@ public class ModifyOrderScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        PayBt = new javax.swing.JButton();
+        AddBt = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
+
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Οrder of table # " + String.valueOf(order.tableNumber));
+
+        jScrollPane1.setViewportView(jList1);
+
+        PayBt.setText("Payment");
+
+        AddBt.setText("Add Product");
+        AddBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBtActionPerformed(evt);
+            }
+        });
+
+        jScrollPane3.setViewportView(jList3);
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Modify order- Add Items");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(PayBt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 17, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(33, 33, 33)
+                        .addComponent(AddBt)
+                        .addGap(11, 11, 11)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(AddBt))
+                        .addGap(16, 16, 16))
+                    .addComponent(PayBt)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AddBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtActionPerformed
+        // TODO add your handling code here:
+          String selectedItem = jList1.getSelectedValue();
+    if (selectedItem != null) {
+        // Βρείτε την τιμή του επιλεγμένου προϊόντος
+        String itemName = selectedItem.split(":")[0];
+        double itemPrice = 0;
+        for (MenuItem item : menu.getMenuItems()) {
+            if (item.toString().startsWith(itemName)) {
+                itemPrice = item.getPrice();
+                break;
+            }
+        }
+        order.addItem(itemName, itemPrice);
+        listModel.addElement(selectedItem);
+        updateTotal();
+        JOptionPane.showMessageDialog(this, "Product added to the order.", "Success", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a product to add.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_AddBtActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         StaffHomeScreen staffHomeScreen = new StaffHomeScreen(waiter, menu);
+        staffHomeScreen.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -83,5 +246,17 @@ public class ModifyOrderScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddBt;
+    private javax.swing.JButton PayBt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jList3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel totalLabel;
     // End of variables declaration//GEN-END:variables
 }

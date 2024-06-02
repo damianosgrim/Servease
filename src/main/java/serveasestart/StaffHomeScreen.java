@@ -169,28 +169,28 @@ public class StaffHomeScreen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         try {
-            int tableNumber = Integer.parseInt(jTextField1.getText());
-            Tables table = tablesMap.get(tableNumber);
+          try {
+        int tableNumber = Integer.parseInt(jTextField1.getText());
+        Tables table = tablesMap.get(tableNumber);
 
-            if (table == null) {
-                jLabel3.setText("Table " + tableNumber + " does not exist.");
-                NewOrderbt.setVisible(false);
-                ModifuOrderbt.setVisible(false);
-            } else if (ordersMap.containsKey(tableNumber)) {
-                jLabel3.setText("Table " + tableNumber + " is available for new orders.");
-                NewOrderbt.setVisible(true);
-                ModifuOrderbt.setVisible(false);
-            } else {
-                jLabel3.setText("Table " + tableNumber + " has an open order.");
-                NewOrderbt.setVisible(true);
-                ModifuOrderbt.setVisible(true);
-            }
-        } catch (NumberFormatException e) {
-            jLabel3.setText("Please enter a valid table number.");
+        if (table == null) {
+            jLabel3.setText("Table " + tableNumber + " does not exist.");
             NewOrderbt.setVisible(false);
             ModifuOrderbt.setVisible(false);
+        } else if (ordersMap.containsKey(tableNumber)) {
+            jLabel3.setText("Table " + tableNumber + " has an open order.");
+            NewOrderbt.setVisible(false);
+            ModifuOrderbt.setVisible(true);
+        } else {
+            jLabel3.setText("Table " + tableNumber + " is available for new orders.");
+            NewOrderbt.setVisible(true);
+            ModifuOrderbt.setVisible(false);
         }
+    } catch (NumberFormatException e) {
+        jLabel3.setText("Please enter a valid table number.");
+        NewOrderbt.setVisible(false);
+        ModifuOrderbt.setVisible(false);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

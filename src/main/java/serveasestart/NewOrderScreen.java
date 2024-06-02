@@ -184,7 +184,16 @@ public class NewOrderScreen extends javax.swing.JFrame {
 
             String selectedItem = MenuList.getSelectedValue();
             if (selectedItem != null) {
-                currentOrder.addItem(selectedItem, "");
+                // Βρείτε την τιμή του επιλεγμένου προϊόντος
+                String itemName = selectedItem.split(":")[0];
+                double itemPrice = 0;
+                for (MenuItem item : menu.getMenuItems()) {
+                    if (item.toString().startsWith(itemName)) {
+                        itemPrice = item.getPrice();
+                        break;
+                    }
+                }
+                currentOrder.addItem(itemName, itemPrice);
                 JOptionPane.showMessageDialog(this, "Product added to the order.", "Success", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Please select a product to add.", "Error", JOptionPane.ERROR_MESSAGE);
