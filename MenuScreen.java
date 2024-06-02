@@ -10,12 +10,13 @@ package serveasestart;
  */
 public class MenuScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuScreen
-     */
-    public MenuScreen() {
+     private Customer authenticatedCustomer;
+
+    public MenuScreen(Customer authenticatedCustomer) {
+        this.authenticatedCustomer = authenticatedCustomer;
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,10 +79,9 @@ public class MenuScreen extends javax.swing.JFrame {
 
     private void BackbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackbtActionPerformed
         // TODO add your handling code here:
-        CustomerHomeScreen chs = new CustomerHomeScreen ();
-        chs.show();
-        
-        dispose ();
+        CustomerHomeScreen chs = new CustomerHomeScreen (authenticatedCustomer);
+         chs.setVisible(true);
+          dispose();
     }//GEN-LAST:event_BackbtActionPerformed
 
     /**
@@ -114,7 +114,7 @@ public class MenuScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuScreen().setVisible(true);
+                new MenuScreen(null).setVisible(true);
             }
         });
     }

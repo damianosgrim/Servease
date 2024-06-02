@@ -4,55 +4,60 @@
  */
 package serveasestart;
 
-
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class Customer extends User {
-    private int roomNumber;
 
-    public Customer(String id, String username, String firstName, String lastName, String password, int roomNumber) {
-        super(id, username, firstName, lastName, password, "customer");
+    static ArrayList<Customer> customers;
+
+    private int roomNumber;
+    private String lastName;
+    private String firstName;
+    private String checkInDate;
+    private String checkOutDate;
+
+    public Customer(String id, String username, String firstName, String lastName , String password, String checkInDate, String checkOutDate, int roomNumber) {
+        super(id, username, firstName, lastName, password,"customer");
         this.roomNumber = roomNumber;
+        this.lastName = lastName;
+        this.firstName = firstName;
+         this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
     }
 
     
-    
+ 
+
+   
+    public String getFirstName() {
+        return firstName;
+    }
     public int getRoomNumber() {
         return roomNumber;
     }
-    
- 
 
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+public String getCheckInDate() {
+        return checkInDate;
+    }
+
+    public String getCheckOutDate() {
+        return checkOutDate;
+    }
+    public static void setCustomers(ArrayList<Customer> customers) {
+        Customer.customers = customers;
+    }
+
+    
     public void viewOrderHistory() {
         // Προβολή ιστορικού παραγγελιών
     }
-    
-     public boolean authenticate() {
-        // Code to authenticate customer
-        // For simplicity, assume always returns true
-        return true;
-    }
-
-    public void viewMenu(Menu menu) {
-        menu.displayMenu();
-    }
-
-    public void makeReservation(Reservation reservation) {
-        if (reservation.isAvailable()) {
-            reservation.bookTable();
-        } else {
-            System.out.println("No tables available at this time.");
-        }
-    }
-
-    public void activateRoomCharge(RoomCharge roomCharge) {
-        if (roomCharge.isCardProvided()) {
-            roomCharge.activate();
-        } else {
-            System.out.println("No credit card provided at the reception.");
-        }
-    }
 }
+

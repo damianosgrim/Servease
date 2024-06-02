@@ -4,9 +4,6 @@
  */
 package serveasestart;
 
-import static java.awt.SystemColor.menu;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author User
@@ -19,18 +16,7 @@ public class StaffLoginScreen extends javax.swing.JFrame {
     public StaffLoginScreen() {
         initComponents();
     }
-    
-  private Admin admin;
-   private Waiter waiter;
-    private Menu menu;
-   
-   public StaffLoginScreen(Admin admin, Waiter waiter, Menu menu) {
-        this.admin = admin;
-        this.waiter = waiter;
-        this.menu = menu;
-        initComponents();
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +30,7 @@ public class StaffLoginScreen extends javax.swing.JFrame {
         StaffIDtf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        LoginBut = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,13 +47,8 @@ public class StaffLoginScreen extends javax.swing.JFrame {
             }
         });
 
-        LoginBut.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LoginBut.setText("Login");
-        LoginBut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginButActionPerformed(evt);
-            }
-        });
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setText("Login");
 
         jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 16)); // NOI18N
         jLabel3.setText("Staff Login");
@@ -84,7 +65,7 @@ public class StaffLoginScreen extends javax.swing.JFrame {
                         .addComponent(StaffIDtf, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addComponent(jPasswordField1))
-                    .addComponent(LoginBut)
+                    .addComponent(jButton1)
                     .addComponent(jLabel3))
                 .addContainerGap(277, Short.MAX_VALUE))
         );
@@ -102,7 +83,7 @@ public class StaffLoginScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(LoginBut)
+                .addComponent(jButton1)
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
@@ -113,45 +94,10 @@ public class StaffLoginScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-    private void LoginButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButActionPerformed
-        // TODO add your handling code here:
-        String id = StaffIDtf.getText();
-    String password = new String(jPasswordField1.getPassword());
-
-    if (id.isEmpty() || password.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter both ID and Password");
-        System.out.println("Empty ID or Password");
-        return;
-    }
-
-    // Check credentials
-    if (admin.getId().equals(id) && admin.getPassword().equals(password)) {
-        System.out.println("Admin login successful");
-        AdminHomeScreen ahs = new AdminHomeScreen();
-        ahs.setVisible(true);
-        dispose();
-    } else if (waiter.getId().equals(id) && waiter.getPassword().equals(password)) {
-        System.out.println("Waiter login successful");
-        StaffHomeScreen shs = new StaffHomeScreen(waiter, menu);
-        shs.setVisible(true);
-        dispose();
-    } else {
-        JOptionPane.showMessageDialog(this, "Invalid ID or Password");
-        System.out.println("Invalid ID or Password");
-    }
-    }//GEN-LAST:event_LoginButActionPerformed
-
     /**
      * @param args the command line arguments
      */
-   public static void main(String args[]) {
-       Menu menu = new Menu();
-        menu.addItem("Pizza", 10.99, "Delicious cheese pizza");
-        menu.addItem("Burger", 8.99, "Juicy beef burger");
-        menu.addItem("Pasta", 12.99, "Pasta with tomato sauce");
-        Waiter waiter = new Waiter("w101", "mgianeiou", "Melina", "Gianeiou","password");
-        Admin admin = new Admin("a001", "admin", "Eri", "Ntoulai", "adminpass", menu);
-
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -178,15 +124,14 @@ public class StaffLoginScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffLoginScreen(admin, waiter, menu).setVisible(true);
+                new StaffLoginScreen().setVisible(true);
             }
         });
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton LoginBut;
     private javax.swing.JTextField StaffIDtf;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

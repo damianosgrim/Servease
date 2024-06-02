@@ -28,11 +28,11 @@ public class Admin extends User {
         return true;
     }
 
-    public void addWaiter(String id, String username, String firstName, String lastName, String password) {
+    public void addWaiter(String id, String username, String firstName, String lastName,String checkInDate, String checkOutDate, String password) {
         if (staff.containsKey(id)) {
             System.out.println("Waiter with this ID already exists.");
         } else {
-            Waiter newWaiter = new Waiter(id, username, firstName,  lastName,  password );
+            Waiter newWaiter = new Waiter(id, username, firstName,  lastName,password );
             staff.put(id, newWaiter);
             System.out.println("Waiter added successfully.");
         }

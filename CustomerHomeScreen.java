@@ -4,19 +4,26 @@
  */
 package serveasestart;
 
+import javax.swing.JOptionPane;
+import serveasestart.CustomerLoginScreen;
+import serveasestart.AccountScreen;
+import serveasestart.Customer;
+
 /**
  *
  * @author User
  */
 public class CustomerHomeScreen extends javax.swing.JFrame {
-
+   private Customer customer;
     /**
      * Creates new form CustomerHomeScreen
      */
-    public CustomerHomeScreen() {
+     public CustomerHomeScreen(Customer customer) {
+        this.customer = customer;
         initComponents();
+        jLabel1.setText("Welcome, " + customer.getFirstName() + " " + customer.getLastName());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,8 +99,8 @@ public class CustomerHomeScreen extends javax.swing.JFrame {
 
     private void ViewMenubtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewMenubtActionPerformed
         // TODO add your handling code here:
-        MenuScreen ms = new MenuScreen ();
-        ms.show();
+        MenuScreen ms = new MenuScreen (customer);
+        ms.setVisible(true);
         
         dispose ();
     }//GEN-LAST:event_ViewMenubtActionPerformed
@@ -107,10 +114,10 @@ public class CustomerHomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ReserveTablebtActionPerformed
 
     private void MyAccountbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyAccountbtActionPerformed
-        // TODO add your handling code here:
-        MenuScreen ms = new MenuScreen ();
-        ms.show();
-        
+       // TODO add your handling code here:
+     new AccountScreen(customer).setVisible(true);
+        dispose();
+
         dispose ();
     }//GEN-LAST:event_MyAccountbtActionPerformed
 
@@ -142,11 +149,7 @@ public class CustomerHomeScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CustomerHomeScreen().setVisible(true);
-            }
-        });
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

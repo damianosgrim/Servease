@@ -4,8 +4,6 @@
  */
 package serveasestart;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,10 +19,6 @@ public class Menu {
         for (MenuItem item : menuItems.values()) {
             System.out.println(item);
         }
-    }
-    
-    public Collection<MenuItem> getMenuItems() {
-         return new ArrayList<>(menuItems.values());
     }
 
     public void addItem(String name, double price, String description) {
@@ -71,14 +65,10 @@ class MenuItem {
     public void setPrice(double price) {
         this.price = price;
     }
-    
-    public double getPrice(){
-        return price;
-    }
-    
 
     @Override
     public String toString() {
         return name + ": " + price + " - " + description;
     }
 }
+

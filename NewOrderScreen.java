@@ -4,40 +4,19 @@
  */
 package serveasestart;
 
-import java.util.Collection;
-import java.util.Iterator;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-
 /**
  *
  * @author User
  */
 public class NewOrderScreen extends javax.swing.JFrame {
-   private static int tableNumber;
-   private Order currentOrder;
-   private static Menu menu;
-   private DefaultListModel<String> listModel;
-   private static Waiter waiter;
-   
+ 
+
     /**
      * Creates new form NewOrderScreen
-     * @param tableNumber
-     * @param menu
-     * @param waiter
      */
-    public NewOrderScreen(int tableNumber, Menu menu, Waiter waiter) {
-        NewOrderScreen.tableNumber = tableNumber;
-        NewOrderScreen.menu = menu;
-        NewOrderScreen.waiter = waiter; 
+    public NewOrderScreen() {
         initComponents();
-        initializeListModel();
-
-       
-    } 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,21 +27,18 @@ public class NewOrderScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         MenuList = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        SendOrderbt = new javax.swing.JButton();
-
-        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        MenuList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
         jScrollPane1.setViewportView(MenuList);
 
         jButton1.setText("Add Product");
@@ -73,34 +49,7 @@ public class NewOrderScreen extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
-        jLabel1.setText("New order for table # " + String.valueOf(tableNumber));
-        jLabel1.setToolTipText("");
-
-        jLabel2.setText("Enter Room Number");
-
-        jLabel3.setText("Enter num of people");
-
-        jTextField1.setText("#room");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.setText("#people");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        SendOrderbt.setText("Send Order");
-        SendOrderbt.setActionCommand("");
-        SendOrderbt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SendOrderbtActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("New Order");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,132 +57,38 @@ public class NewOrderScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SendOrderbt)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(34, 34, 34)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(SendOrderbt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- 
-    
-     private void initializeListModel() {
-        listModel = new DefaultListModel<>();
-        Collection<MenuItem> items = menu.getMenuItems();
-        for (MenuItem item : items) {
-            listModel.addElement(item.toString());
-        }
-        MenuList.setModel(listModel);
-    }
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String roomNumber = jTextField1.getText();
-        String numPeopleText = jTextField2.getText();
-
-        if (roomNumber.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter the room number.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (numPeopleText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter the number of people.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        try {
-            int numPeople = Integer.parseInt(numPeopleText);
-            if (currentOrder == null) {
-                currentOrder = new Order(String.valueOf(tableNumber), roomNumber, numPeople);
-            }
-
-            String selectedItem = MenuList.getSelectedValue();
-            if (selectedItem != null) {
-                // Βρείτε την τιμή του επιλεγμένου προϊόντος
-                String itemName = selectedItem.split(":")[0];
-                double itemPrice = 0;
-                for (MenuItem item : menu.getMenuItems()) {
-                    if (item.toString().startsWith(itemName)) {
-                        itemPrice = item.getPrice();
-                        break;
-                    }
-                }
-                currentOrder.addItem(itemName, itemPrice);
-                JOptionPane.showMessageDialog(this, "Product added to the order.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Please select a product to add.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid number of people.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void SendOrderbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendOrderbtActionPerformed
-        // TODO add your handling code here:
-         if (currentOrder != null) {
-            
-            System.out.println("Order sent to kitchen: " + currentOrder);
-            
-            //Apoth
-            StaffHomeScreen.ordersMap.put(tableNumber, currentOrder);
-
-            // Επιστροφή στην StaffHomeScreen
-            StaffHomeScreen staffHomeScreen = new StaffHomeScreen(waiter, menu);
-            staffHomeScreen.setVisible(true);
-            this.dispose(); // Κλείσιμο της NewOrderScreen
-        } else {
-            JOptionPane.showMessageDialog(this, "No order to send.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_SendOrderbtActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
- 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -256,23 +111,19 @@ public class NewOrderScreen extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NewOrderScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewOrderScreen(tableNumber, menu, waiter).setVisible(true);
+                new NewOrderScreen().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> MenuList;
-    private javax.swing.JButton SendOrderbt;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

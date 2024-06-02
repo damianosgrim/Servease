@@ -4,20 +4,32 @@
  */
 package serveasestart;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
+import serveasestart.Customer;
+public class CustomerLoginScreen extends javax.swing.JFrame {
+    private ArrayList<Customer> customers; // Μεταβλητή που θα αποθηκεύει τους πελάτες
 /**
  *
  * @author User
  */
-public class CustomerLoginScreen extends javax.swing.JFrame {
+  
 
+    public CustomerLoginScreen() {
+        initComponents();
+        initializeCustomers(); }
+ public void initializeCustomers() {
+        // Δημιουργία λίστας πελατών και προσθήκη πελατών
+        customers = new ArrayList<>();
+        customers.add(new Customer("1", "john_doe", "John", "Doe", "password123","2023-05-09","2023-05-15", 101));
+        customers.add(new Customer("2", "jane_smith", "Jane", "Smith", "password456","2023-05-17","2023-05-21", 102));
+        customers.add(new Customer("3", "alice_jones", "Alice", "Jones", "password789","2023-05-01","2023-05-07", 103));
+        customers.add(new Customer("4", "bob_brown", "Bob", "Brown","password012","2023-06-13","2023-06-30", 104));
+    }
     /**
      * Creates new form CustomerLoginScreen
      */
-    public CustomerLoginScreen() {
-        initComponents();
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,8 +112,11 @@ public class CustomerLoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_RoomNumbertfActionPerformed
 
     private void LoginbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginbtActionPerformed
-        // TODO add your handling code here:
-       String roomNumberStr = RoomNumbertf.getText();
+                                
+   System.out.println("Login button clicked!"); // Μήνυμα ελέγχου
+
+    if (!customers.isEmpty()) {
+        String roomNumberStr = RoomNumbertf.getText();
         String lastName = LastNametf.getText();
 
         if (roomNumberStr.isEmpty() || lastName.isEmpty()) {
@@ -110,15 +125,36 @@ public class CustomerLoginScreen extends javax.swing.JFrame {
         }
 
         int roomNumber = Integer.parseInt(roomNumberStr);
+        boolean isAuthenticated = false;
+         Customer authenticatedCustomer = null;
+        // Εκτύπωση τιμών για ελέγχου
+        System.out.println("Entered Room Number: " + roomNumber);
+        System.out.println("Entered Last Name: " + lastName);
 
-     /*  if (customer.getRoomNumber() == roomNumber && customer.getLastName().equals(lastName)) {
-            CustomerHomeScreen chs = new CustomerHomeScreen();
-            chs.show();
+        // Ελέγχουμε αν υπάρχουν πελάτες στη λίστα
+        for (Customer customer : customers) {
+            System.out.println("Customer Room Number: " + customer.getRoomNumber());
+            System.out.println("Customer Last Name: " + customer.getLastName());
+
+            if (customer.getRoomNumber() == roomNumber && customer.getLastName().equals(lastName)) {
+               authenticatedCustomer = customer;
+                
+                break;
+            }
+        }
+
+        if (authenticatedCustomer != null) {
+            // Αν ο πελάτης είναι αυθεντικός, εμφανίζουμε την οθόνη του πελάτη
+             CustomerHomeScreen chs = new CustomerHomeScreen(authenticatedCustomer);
+            chs.setVisible(true);
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Invalid Room Number or Last Name");
         }
-    */ 
+    } else {
+        System.out.println("Customers list is empty."); // Μήνυμα ελέγχου
+        JOptionPane.showMessageDialog(this, "Customer database is empty");
+    }
     }//GEN-LAST:event_LoginbtActionPerformed
 
     /**
