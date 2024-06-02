@@ -22,11 +22,12 @@ public class StaffLoginScreen extends javax.swing.JFrame {
     
   private Admin admin;
    private Waiter waiter;
-    private static Menu menu;
+    private Menu menu;
    
-   public StaffLoginScreen(Admin admin, Waiter waiter) {
+   public StaffLoginScreen(Admin admin, Waiter waiter, Menu menu) {
         this.admin = admin;
         this.waiter = waiter;
+        this.menu = menu;
         initComponents();
     }
     
@@ -131,7 +132,7 @@ public class StaffLoginScreen extends javax.swing.JFrame {
         dispose();
     } else if (waiter.getId().equals(id) && waiter.getPassword().equals(password)) {
         System.out.println("Waiter login successful");
-        StaffHomeScreen shs = new StaffHomeScreen(waiter);
+        StaffHomeScreen shs = new StaffHomeScreen(waiter, menu);
         shs.setVisible(true);
         dispose();
     } else {
@@ -144,6 +145,10 @@ public class StaffLoginScreen extends javax.swing.JFrame {
      * @param args the command line arguments
      */
    public static void main(String args[]) {
+       Menu menu = new Menu();
+        menu.addItem("Pizza", 10.99, "Delicious cheese pizza");
+        menu.addItem("Burger", 8.99, "Juicy beef burger");
+        menu.addItem("Pasta", 12.99, "Pasta with tomato sauce");
         Waiter waiter = new Waiter("w101", "mgianeiou", "Melina", "Gianeiou","password");
         Admin admin = new Admin("a001", "admin", "Eri", "Ntoulai", "adminpass", menu);
 
@@ -173,7 +178,7 @@ public class StaffLoginScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffLoginScreen(admin, waiter).setVisible(true);
+                new StaffLoginScreen(admin, waiter, menu).setVisible(true);
             }
         });
     }

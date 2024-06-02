@@ -9,11 +9,16 @@ package serveasestart;
  * @author User
  */
 public class ModifyOrderScreen extends javax.swing.JFrame {
-
+ private static Order order;
+   private static Menu menu;
+   private static Waiter waiter;
     /**
      * Creates new form ModifyOrderScreen
      */
-    public ModifyOrderScreen() {
+    public ModifyOrderScreen(Order order, Menu menu, Waiter waiter) {
+        this.order = order;
+        this.waiter = waiter;
+        this.menu = menu;
         initComponents();
     }
 
@@ -72,7 +77,7 @@ public class ModifyOrderScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModifyOrderScreen().setVisible(true);
+                new ModifyOrderScreen(order, menu, waiter).setVisible(true);
             }
         });
     }

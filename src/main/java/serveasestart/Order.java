@@ -20,12 +20,14 @@ public class Order {
     private String roomNumber;
     private List<String> items;
     private boolean isPaid;
+    private int num_people;
 
-    public Order(String tableNumber, String roomNumber) {
+    public Order(String tableNumber, String roomNumber, int num_people) {
         this.tableNumber = tableNumber;
         this.roomNumber = roomNumber;
         this.items = new ArrayList<>();
         this.isPaid = false;
+        this.num_people = num_people; 
     }
 
    
@@ -65,6 +67,20 @@ public class Order {
     private double calculateTotal() {
         // Dummy implementation
         return items.size() * 10.0; // Assume each item costs 10 units
+    }
+    
+     public int getNum_people() {
+        return num_people;
+        
+    }
+     
+      public String getTableNumber() {
+        return tableNumber;
+    }
+      
+     
+      public String getRoomNumber() {
+        return roomNumber;
     }
 }
 
