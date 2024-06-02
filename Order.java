@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servease_test;
+package serveasestart;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,16 +16,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private String tableNumber;
+    public String tableNumber;
     private String roomNumber;
     private List<String> items;
     private boolean isPaid;
+    private int num_people;
+    private List<Double> prices;
+    
 
-    public Order(String tableNumber, String roomNumber) {
+    public Order(String tableNumber, String roomNumber, int num_people) {
         this.tableNumber = tableNumber;
         this.roomNumber = roomNumber;
         this.items = new ArrayList<>();
         this.isPaid = false;
+        this.num_people = num_people; 
+        this.prices = new ArrayList<>();
     }
 
    
@@ -33,9 +38,14 @@ public class Order {
         // Code to place order
         System.out.println("Order placed for table " + tableNumber + " and room " + roomNumber);
     } 
-    public void addItem(String item, String note) {
+ /*public void addItem(String item, String note) {
         items.add(item + " - " + note);
-    }
+    }*/
+    
+   public void addItem(String item, double price) {
+    items.add(item);
+    prices.add(price);
+}
 
     public void viewOrder() {
         System.out.println("Order for table " + tableNumber + ":");
@@ -62,9 +72,37 @@ public class Order {
         }
     }
 
-    private double calculateTotal() {
-        // Dummy implementation
-        return items.size() * 10.0; // Assume each item costs 10 units
+    public double calculateTotal() {
+        double total = 0;
+        for (double price : prices) {
+            total += price;
+        }
+        return total;
     }
+    
+     public int getNum_people() {
+        return num_people;
+        
+    }
+     
+      public String getTableNumber() {
+        return tableNumber;
+    }
+      
+     
+      public String getRoomNumber() {
+        return roomNumber;
+    }
+      
+        public List<String> getItems() {
+        return items;
+    }
+        
+     public List<Double> getPrices() {
+    return prices;
+}
+     public void setPaid(boolean isPaid) {
+    this.isPaid = isPaid;
+}
 }
 

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servease_test;
+package serveasestart;
 
 /**
  *
@@ -13,7 +13,7 @@ public class User {
     private String id;
     private String username;
     private String firstName;
-    private String lastName;
+    private  String lastName;
     private String password;
     private String role;
 
@@ -42,8 +42,12 @@ public class User {
         return firstName;
     }
     
-    public String getLasteName() {
+    public String getLastName() {
         return lastName;
+    }
+    
+     public String getId() {
+        return id;
     }
     
 }

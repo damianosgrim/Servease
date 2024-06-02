@@ -1,4 +1,4 @@
-package servease_test;
+package serveasestart;
 
 public class Waiter extends User {
     public Waiter(String id, String username, String firstName, String lastName, String password) {

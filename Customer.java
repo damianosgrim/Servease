@@ -2,20 +2,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servease_test;
+package serveasestart;
 
-import test.Profile;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import serveasestart.User;
 
 public class Customer extends User {
-    private int roomNumber;
 
-    public Customer(String id, String username, String firstName, String lastName, String password, int roomNumber) {
-        super(id, username, firstName, lastName, password, "customer");
+    static ArrayList<Customer> customers;
+
+    private int roomNumber;
+    private String lastName;
+    private String firstName;
+    private String checkInDate;
+    private String checkOutDate;
+    private RoomCharge roomCharge;
+
+    public Customer(String id, String username, String firstName, String lastName , String password, String checkInDate, String checkOutDate, int roomNumber) {
+        super(id, username, firstName, lastName, password,"customer");
         this.roomNumber = roomNumber;
+        this.lastName = lastName;
+        this.firstName = firstName;
+         this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
     }
 
     
-    
+ 
+public RoomCharge getRoomCharge() {
+        return roomCharge;
+    }
+
+    public void setRoomCharge(RoomCharge roomCharge) {
+        this.roomCharge = roomCharge;
+    }
+
+   
+    public String getFirstName() {
+        return firstName;
+    }
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -24,21 +50,28 @@ public class Customer extends User {
         this.roomNumber = roomNumber;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+public String getCheckInDate() {
+        return checkInDate;
+    }
+
+    public String getCheckOutDate() {
+        return checkOutDate;
+    }
+    public static void setCustomers(ArrayList<Customer> customers) {
+        Customer.customers = customers;
+    }
+
+    
     public void viewOrderHistory() {
         // Προβολή ιστορικού παραγγελιών
     }
     
-     public boolean authenticate() {
-        // Code to authenticate customer
-        // For simplicity, assume always returns true
-        return true;
-    }
-
-    public void viewMenu(Menu menu) {
-        menu.displayMenu();
-    }
-
-    public void makeReservation(Reservation reservation) {
+    
+    
+     public void makeReservation(Reservation reservation) {
         if (reservation.isAvailable()) {
             reservation.bookTable();
         } else {
@@ -49,8 +82,10 @@ public class Customer extends User {
     public void activateRoomCharge(RoomCharge roomCharge) {
         if (roomCharge.isCardProvided()) {
             roomCharge.activate();
+            this.setRoomCharge(roomCharge);
         } else {
             System.out.println("No credit card provided at the reception.");
         }
     }
 }
+
