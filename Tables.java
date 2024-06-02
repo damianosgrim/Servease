@@ -4,20 +4,17 @@
  */
 package serveasestart;
 
+/**
+ *
+ * @author hp
+ */
 public class Tables {
     private int tableNumber;
     private boolean isAvailable;
 
+    // Κατασκευαστής
     public Tables(int tableNumber) {
         this.tableNumber = tableNumber;
         this.isAvailable = true;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
     }
 }

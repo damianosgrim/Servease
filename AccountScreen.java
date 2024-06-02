@@ -3,20 +3,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package serveasestart;
-
+import serveasestart.CustomerHomeScreen;
 /**
  *
  * @author User
  */
 public class AccountScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AccountScreen
-     */
-    public AccountScreen() {
-        initComponents();
+ 
+    private Customer customer;
+
+    public AccountScreen(Customer customer) {
+    this.customer = customer;
+    initComponents();
+    updateFullNameLabel(customer.getFirstName() + " " + customer.getLastName());
+    updateCheckInDateLabel(customer.getCheckInDate());
+    updateCheckOutDateLabel(customer.getCheckOutDate());
     }
 
+   // AccountScreen() {
+     //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    //}
+
+   
+   
+    
+    // Υπόλοιπος κώδικας παραμένει όπως είναι
+
+    private void updateFullNameLabel(String fullName) {
+            FullNameLabel.setText(fullName);
+        }
+    
+  private void updateCheckInDateLabel(String checkInDate) {
+        CheckInDate.setText(checkInDate);
+    }
+
+    private void updateCheckOutDateLabel(String checkOutDate) {
+        CheckOutDate.setText(checkOutDate);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,18 +89,22 @@ public class AccountScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(FullNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CheckOutDate)
-                            .addComponent(jLabel3)))
-                    .addComponent(RoomChargebt)
-                    .addComponent(jLabel4)
-                    .addComponent(CheckInDate))
-                .addContainerGap(130, Short.MAX_VALUE))
+                            .addComponent(jLabel1)
+                            .addComponent(FullNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(70, 70, 70)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckOutDate)
+                                    .addComponent(jLabel3)))
+                            .addComponent(RoomChargebt)
+                            .addComponent(CheckInDate))
+                        .addContainerGap(130, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +138,9 @@ public class AccountScreen extends javax.swing.JFrame {
     private void RoomChargebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoomChargebtActionPerformed
         // TODO add your handling code here:
         RoomChargeScreen rcs = new RoomChargeScreen ();
-        rcs.show();
+        rcs.setVisible(true);
         
-        dispose ();
+        this.setVisible(false);
     }//GEN-LAST:event_RoomChargebtActionPerformed
 
     /**
@@ -139,11 +169,11 @@ public class AccountScreen extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AccountScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            
             public void run() {
-                new AccountScreen().setVisible(true);
+                
             }
         });
     }
